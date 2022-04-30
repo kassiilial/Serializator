@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using SerializerTests.Implementations;
 using SerializerTests.Nodes;
 
@@ -41,12 +40,16 @@ namespace TestApp
             };
            node1.Next = node2;
            node2.Previous = node1;
-          // node2.Next = node3;
+           node2.Next = node3;
             node3.Previous = node2;
            node3.Next = node4;
            node4.Previous = node3;
 
-            /*using (Stream s = new MemoryStream())
+           node1.Random = node4;
+           node2.Random = node3;
+           node3.Random = node3;
+           node4.Random = node1;
+            using (Stream s = new MemoryStream())
             {
                        IliaKassSerializer serializer = new IliaKassSerializer();
                             
@@ -57,16 +60,25 @@ namespace TestApp
                             Console.WriteLine(firstnode.Next.Data);
                             Console.WriteLine(firstnode.Next.Next.Data);
                             Console.WriteLine(firstnode.Next.Next.Next.Data);
-            }*/
+            }
 
-            var options = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
-            var a = JsonConvert.SerializeObject(node1, options);
-            Console.WriteLine(a);
-            var b = JsonConvert.DeserializeObject<ListNode>(a, options);
-            Console.WriteLine(b.Data);
-            Console.WriteLine(b.Next.Data);
-
-
+            Console.WriteLine("Deep Copy");
+            var newNode1 = await new IliaKassSerializer().DeepCopy(node1);
+            Console.WriteLine(newNode1.Data);
+            Console.WriteLine(newNode1.Next.Data);
+            Console.WriteLine(newNode1.Next.Next.Data);
+            Console.WriteLine(newNode1.Next.Next.Next.Data);
+            Console.WriteLine();
+            Console.WriteLine(newNode1.Next.Next.Next.Data);
+            Console.WriteLine(newNode1.Next.Next.Next.Previous.Data);
+            Console.WriteLine(newNode1.Next.Next.Next.Previous.Previous.Data);
+            Console.WriteLine(newNode1.Next.Next.Next.Previous.Previous.Previous.Data);
+            Console.WriteLine();
+            Console.WriteLine(newNode1.Random.Data);
+            Console.WriteLine(newNode1.Next.Random.Data);
+            Console.WriteLine(newNode1.Next.Next.Random.Data);
+            Console.WriteLine(newNode1.Next.Next.Next.Random.Data);
+        
         }
     }
 }
