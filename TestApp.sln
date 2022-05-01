@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializerTests", "SerializerTests\SerializerTests.csproj", "{D2D12A0D-DE90-4465-9595-62B273FCC84A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSerializer", "TestSerializer\TestSerializer.csproj", "{535DC7A4-E4F8-4B8B-8D07-5E48810F7369}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTest", "UTest\UTest.csproj", "{535DC7A4-E4F8-4B8B-8D07-5E48810F7369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

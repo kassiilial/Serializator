@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
@@ -42,7 +43,18 @@ namespace SerializerTests.Implementations
         {
             var options = new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects };
             var streamReader = new StreamReader(s);
-            return JsonConvert.DeserializeObject<ListNode>(await streamReader.ReadToEndAsync(), options);
+            ListNode node = new();
+            try
+            {
+                node = JsonConvert.DeserializeObject<ListNode>(await streamReader.ReadToEndAsync(), options);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new ArgumentException(e.Message);
+            }
+           
+            return node;
         }
         public async Task Serialize([NotNull]ListNode head, [NotNull]Stream s)
         {

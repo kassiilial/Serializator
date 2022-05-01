@@ -3,7 +3,7 @@ using NUnit.Framework;
 using SerializerTests.Implementations;
 using SerializerTests.Nodes;
 
-namespace TestSerializer
+namespace UTest
 {
     public class TestDeepCopy
     {
